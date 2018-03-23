@@ -1,0 +1,21 @@
+h2 {
+    font-weight: bold;
+}
+table,
+ th,
+ td {
+     border: 1px solid #eee;
+     border-collapse: collapse;
+ }
+
+ th,
+ td {
+     padding: 5px;
+ }
+
+table th {
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    background-color: #d9d3d3;
+}

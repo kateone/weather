@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>氣象局XML試題_v2</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+
+	</head>
+	<body>
+
+		<!-- Banner -->
+			<section id="banner">
+				<h2>全臺灣各鄉鎮天氣預報</h2>
+				<p>未來2天天氣預報</p>
+		
+			</section>
+
+		<!-- One -->
+			<section id="one" class="wrapper special">
+			
+				<div class="inner">
+				<table id="demo"></table>
+					
+				</div>
+			</section>
+
+		<!-- Two -->
+			<section id="two" class="wrapper style2 special">
+				<div class="inner narrow">
+					<header>
+						<h2></h2>
+					</header>
+					
+				</div>
+			</section>
+
+	
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					TEST XML／Ajax
+				</div>
+			</footer>
+
+		
+	<!--程式碼開始-->
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                myFunction(this);
+            }
+        };
+        
+        
+        
+        xhr.open("GET", "taiwan72.xml", true); //讀取資料，三個參數值要：格式,網址,同步非同步
+        xhr.send(); //傳送資料
+        
+        //taiwan72_1.xml是暫時資料
+
+        
+        function myFunction(xml) {
+            var i;
+            var xmlDoc = xml.responseXML;
+           //宣告ajax从数据库中读取信息
+            
+            
+            var table = "<tr><th>各縣市</th><th>氣溫</th><th>風向</th><th>緯度</th><th>經度</th></tr>";
+            //Table 表頭
+            
+            var x = xmlDoc.getElementsByTagName("location");
+            //getElementsByTagName()找到具有指定标签名的子孙元素。
+            
+            var y = xmlDoc.getElementsByTagName("elementValue");
+            //getElementsByTagName()找到具有指定标签名的子孙元素。
+            
+         
+            for (i = 0; i < x.length; i++) { 
+            //length 属性定义节点列表的长度（即节点的数量）      
+                
+                table += "<tr><td>" +
+                    x[i].getElementsByTagName("locationName")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    y[i].getElementsByTagName("value")[0].childNodes[0].nodeValue + "度"+
+                    "</td><td>" +
+                    x[i].getElementsByTagName("parameterValue")[1].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("lat")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("lon")[0].childNodes[0].nodeValue +
+                    "</td></tr>";
+            }
+            document.getElementById("demo").innerHTML = table;
+            
+            //getElementsByTagName() 访问节点
+            //childNodes[0] - 元素的第一个子节点（文本节点）
+            //nodeValue - 节点的值（文本本身）
+            
+        }
+    </script>
+
+	</body>
+</html>
