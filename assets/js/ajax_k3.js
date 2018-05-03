@@ -62,7 +62,7 @@ function myFunction(xml) {
         
     }
     //alert([1]);
-    document.getElementById("demo").innerHTML = table;
+//    document.getElementById("demo").innerHTML = table;
     document.getElementById("cityselect").innerHTML = form; //P2選單
 
 
@@ -94,11 +94,21 @@ function myFunction(xml) {
     //nodeValue - 节点的值（文本本身）
     //////////////////////5/1///////////////////////////////////
    // getCityValue() // 呼叫一個function
-    var aa=document.getElementById("cityselect")
-    aa.onchange=getCityValue(aa);
-}
-function getCityValue(a){
     
-    alert(a.value);
-    console.log("aa="+a.value)
+//    var aa=document.getElementById("cityselect")
+//    aa.onchange=getCityValue(aa);
+}
+
+    // 建立一個物件
+    var cityObj = document.getElementById("cityselect");
+    // 監聽物件變化
+    cityObj.addEventListener('change', function() {
+        getCityValue(cityObj);
+    });
+
+function getCityValue(obj){
+    alert(obj.value);
+    // 接下來把 alert 改成顯示在下拉選單下面
+    
+    // 完成後接著要做的是找到那個城市的資料置換就完成了
 }
